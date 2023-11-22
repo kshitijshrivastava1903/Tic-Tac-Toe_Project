@@ -1,19 +1,26 @@
 import { useState } from "react";
 const initialGameBoard = [
-    ['X', null, null],
+    [null, null, null],
     [null, null, null],
     [null, null, null]
 
 ]
 
-export default function GameBoard({onSelectSquare}){
+export default function GameBoard({onSelectSquare,currentlyActivePlayer}){
 
     function handleSquareClicked(rowIndex,colIndex){
+        //console.log("Active Player is",currentActivePlayer);
         setGameBoard((prevGameBoard)=>{
             const updatedBoard = [...prevGameBoard.map(innerArray=>[...innerArray])];
-            updatedBoard[rowIndex][colIndex] = 'X';
+            updatedBoard[rowIndex][colIndex] = currentlyActivePlayer;
             return updatedBoard;
         });
+
+        //CHECK FOR WINNER
+
+        
+
+
 
         onSelectSquare();
     }

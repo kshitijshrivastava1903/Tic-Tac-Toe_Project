@@ -4,10 +4,16 @@ import { useState } from 'react'
 function App() {
 
   const [activePlayer, setActivePlayer] = useState('X');
-
+  
   function handleSelectSquare(){
+
+    
+
+    console.log("Active Player from APP is",{activePlayer});
     setActivePlayer((currActivePlayer)=>(currActivePlayer === 'X' ? 'O' : 'X'));
   }
+
+
   return <main>
     <div id="game-container">
 
@@ -17,7 +23,7 @@ function App() {
           
         
       </ol>
-      <GameBoard onSelectSquare={handleSelectSquare}/>
+      <GameBoard onSelectSquare={handleSelectSquare} currentlyActivePlayer={activePlayer}/>
       
 
       GAME BOARD
