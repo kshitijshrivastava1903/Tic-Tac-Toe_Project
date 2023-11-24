@@ -1,38 +1,54 @@
 import { useState } from "react";
-const initialGameBoard = [
-    [null, null, null],
-    [null, null, null],
-    [null, null, null]
 
-]
 
-export default function GameBoard({onSelectSquare,currentlyActivePlayer}){
+export default function board({onSelectSquare,board}){
+
+    //let board = initialboard;
+
+    // for(const turn of turns){
+    //     const {square, player} = turn;
+    //     const {row,col} = square;
+    //     board[row][col] = player;
+    // }
+
+    function checkSquareALreadySelected(rowIndex,colIndex){
+        if(board[rowIndex][colIndex]==null){
+            return false;
+        }   
+        return true;
+    }
+
 
     function handleSquareClicked(rowIndex,colIndex){
         //console.log("Active Player is",currentActivePlayer);
-        setGameBoard((prevGameBoard)=>{
-            const updatedBoard = [...prevGameBoard.map(innerArray=>[...innerArray])];
-            updatedBoard[rowIndex][colIndex] = currentlyActivePlayer;
-            return updatedBoard;
-        });
+    //     setboard((prevboard)=>{
+    //         const updatedBoard = [...prevboard.map(innerArray=>[...innerArray])];
+    //         updatedBoard[rowIndex][colIndex] = currentlyActivePlayer;
+    //         return updatedBoard;
+    //     });
 
-        //CHECK FOR WINNER
+    //     //CHECK FOR WINNER
 
         
 
 
 
-        onSelectSquare();
+    //     onSelectSquare();
+    // }
+
+    //const [board,setboard] = useState(initialboard);
     }
 
-    const [gameBoard,setGameBoard] = useState(initialGameBoard);
-
     return <ol id="game-board">
-        {gameBoard.map((row,rowIndex)=><li key={rowIndex}>
+        {board.map((row,rowIndex)=><li key={rowIndex}>
         <ol>
-            {row.map((playerSymbol,colIndex)=><li key = {colIndex}><button onClick={()=>handleSquareClicked(rowIndex,colIndex)}>{playerSymbol}</button></li>)}
+            {row.map((playerSymbol,colIndex)=><li key = {colIndex}><button onClick={()=>onSelectSquare(rowIndex,colIndex)} disabled={
+                checkSquareALreadySelected(rowIndex,colIndex)?true:false
+            }>
+                {playerSymbol}</button></li>)}
         </ol>
     </li>)}
 
     </ol>
+
 }
